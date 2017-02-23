@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public interface ItemMoveHelperApi {
 
 
+
+
+     int TEXT_HOLDER_TYPE = 0;
+     int IMG_HOLDER_TYPE = 1;
     /**
      * 移动排序，点击喜欢和其他频道之间的转换之后的数据
      */

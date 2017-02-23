@@ -26,13 +26,13 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<String> arrayListBottom;
     private ItemMoveHelperApi itemMoveHelperApi;
     private final ItemMoveCallBackImpl mMoveCallBack;
-    private static final int TEXT_HOLDER_TYPE = 0;
-    private static final int IMG_HOLDER_TYPE = 1;
+
 
     public MyAdapter(RecyclerView recyclerView, Context context, ArrayList<String> arrayListTop,
                      ArrayList<String> arrayListBottom, ItemMoveHelperApi itemMoveHelperApi
     ) {
         this.context = context;
+
         this.arrayListTop = arrayListTop;
         this.arrayListBottom = arrayListBottom;
         this.itemMoveHelperApi = itemMoveHelperApi;
@@ -41,10 +41,6 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         touchHelper.attachToRecyclerView(recyclerView);
     }
 
-
-    public void setNoLongPressDragEnabled(ArrayList<Integer > positionArray){
-        mMoveCallBack.setNoLongPressDragEnabled(positionArray);
-    }
 
     /**
      * 不同类型的item换行
@@ -57,8 +53,8 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    return getItemViewType(position) == MyAdapter.TEXT_HOLDER_TYPE
-                            ? gridManager.getSpanCount() : MyAdapter.IMG_HOLDER_TYPE;
+                    return getItemViewType(position) == ItemMoveHelperApi.TEXT_HOLDER_TYPE
+                            ? gridManager.getSpanCount() : ItemMoveHelperApi.IMG_HOLDER_TYPE;
                 }
             });
         }
@@ -68,9 +64,9 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (position == 0 | position == arrayListTop.size() + 1) {
-            return MyAdapter.TEXT_HOLDER_TYPE;
+            return ItemMoveHelperApi.TEXT_HOLDER_TYPE;
         } else {
-            return MyAdapter.IMG_HOLDER_TYPE;
+            return ItemMoveHelperApi.IMG_HOLDER_TYPE;
         }
     }
 
@@ -120,6 +116,30 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.tv_type);
         }
+    }
+
+
+    /**
+     * 设置不可长按拖拽的位置
+     */
+    public void setNoLongPressDragEnabled(ArrayList<Integer> positionArray) {
+        mMoveCallBack.setNoLongPressDragEnabled(positionArray);
+    }
+
+
+    /**
+     * 设置不可点击的位置
+     */
+    public void setNoClickEnable(ArrayList<Integer> positionArrayNoClick) {
+        mMoveCallBack.setNoClickEnable(positionArrayNoClick);
+
+    }
+
+    /**
+     * 设置振动器时间
+     */
+    public void setVibratorTime(int mTime) {
+        mMoveCallBack.setVibratorTime(mTime);
     }
 }
 

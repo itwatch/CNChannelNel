@@ -18,6 +18,20 @@ import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 
+
+/**
+ * ArrayList<Integer> integers = new ArrayList<>();
+ * integers.add(1);
+ * integers.add(2);
+ * <p>
+ * 设置不可以长按拖拽position
+ * myAdapter.setNoLongPressDragEnabled(integers)
+ * <p>
+ * 设置不可点击position
+ * myAdapter.setNoClickEnable(integers)
+ */
+
+
 public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi {
 
     private ArrayList<String> arrayListInterest, arrayListOther;
@@ -57,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi
         integers.add(1);
         integers.add(2);
         myAdapter.setNoLongPressDragEnabled(integers);
-
-
+        myAdapter.setVibratorTime(20);
     }
 
     /**
@@ -70,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi
 
 
     }
+
     /**
      * 一种ViewHolder的（textView） 的显示（“频道”，“其他”）
      */
@@ -105,12 +119,13 @@ public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi
 
 
     }
+
     /**
      * 绑定holder
      */
     @Override
     public RecyclerView.ViewHolder onCreateViewItemTypeHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0) {
+        if (viewType == ItemMoveHelperApi.TEXT_HOLDER_TYPE) {
             View inflate = mLayoutInflater.inflate(R.layout.receyceltpye, parent, false);
             return myAdapter.new AdapterHolderType(inflate);
 
