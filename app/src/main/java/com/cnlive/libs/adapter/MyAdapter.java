@@ -28,11 +28,13 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final ItemMoveCallBackImpl mMoveCallBack;
 
 
-    public MyAdapter(RecyclerView recyclerView, Context context, ArrayList<String> arrayListTop,
-                     ArrayList<String> arrayListBottom, ItemMoveHelperApi itemMoveHelperApi
+    public MyAdapter(RecyclerView recyclerView,
+                     Context context,
+                     ArrayList<String> arrayListTop,
+                     ArrayList<String> arrayListBottom,
+                     ItemMoveHelperApi itemMoveHelperApi
     ) {
         this.context = context;
-
         this.arrayListTop = arrayListTop;
         this.arrayListBottom = arrayListBottom;
         this.itemMoveHelperApi = itemMoveHelperApi;

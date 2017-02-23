@@ -40,7 +40,6 @@ public class ItemMoveCallBackImpl extends ItemTouchHelper.Callback {
         this.arrayListInterest = arrayListInterest;
         this.arrayListOther = arrayListOther;
         this.myAdapter = myAdapter;
-
         vibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
     }
 
