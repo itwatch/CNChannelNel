@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi
         GridLayoutManager layoutManager1 = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager1);
         recyclerView.setAdapter(myAdapter);
+        ArrayList<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        myAdapter.setNoLongPressDragEnabled(integers);
 
 
     }
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements ItemMoveHelperApi
     public RecyclerView.ViewHolder onCreateViewItemTypeHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             View inflate = mLayoutInflater.inflate(R.layout.receyceltpye, parent, false);
-            return myAdapter.new AdapterHolder(inflate);
+            return myAdapter.new AdapterHolderType(inflate);
 
         } else {
             View inflate = mLayoutInflater.inflate(R.layout.receycelhold1, parent, false);

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @time 2017/2/15  16:16
  * @desc ${TODD}
  */
-public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private ArrayList<String> arrayListTop;
     private ArrayList<String> arrayListBottom;
@@ -39,6 +39,11 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
         mMoveCallBack = new ItemMoveCallBackImpl(itemMoveHelperApi, context, arrayListTop, arrayListBottom, this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(mMoveCallBack);
         touchHelper.attachToRecyclerView(recyclerView);
+    }
+
+
+    public void setNoLongPressDragEnabled(ArrayList<Integer > positionArray){
+        mMoveCallBack.setNoLongPressDragEnabled(positionArray);
     }
 
     /**
@@ -73,7 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-         return itemMoveHelperApi.onCreateViewItemTypeHolder(parent,viewType);
+        return itemMoveHelperApi.onCreateViewItemTypeHolder(parent, viewType);
 
     }
 
@@ -98,12 +103,10 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     }
 
 
-
-
     public class AdapterHolder extends RecyclerView.ViewHolder {
         public SimpleDraweeView simpleDraweeView;
 
-       public AdapterHolder(View itemView) {
+        public AdapterHolder(View itemView) {
             super(itemView);
             simpleDraweeView = (SimpleDraweeView) itemView.findViewById(R.id.friend_face_img);
 
@@ -113,7 +116,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     public class AdapterHolderType extends RecyclerView.ViewHolder {
         public TextView textView;
 
-       public AdapterHolderType(View itemView) {
+        public AdapterHolderType(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.tv_type);
         }

@@ -21,6 +21,7 @@ public class ItemMoveCallBackImpl extends ItemTouchHelper.Callback {
     private ArrayList<String> arrayListInterest, arrayListOther;
     private RecyclerView.ViewHolder viewHolder;
     private MyAdapter myAdapter;
+    private ArrayList<Integer> positionArray;
 
     public ItemMoveCallBackImpl(ItemMoveHelperApi helperApi,
                                 Context context,
@@ -37,7 +38,7 @@ public class ItemMoveCallBackImpl extends ItemTouchHelper.Callback {
 
     /**
      * 点击事件此处是被用来动用（解决点击事件，和排序数据的转换）
-     * */
+     */
     public void OnItemClickListener(int position) {
         if (position > (arrayListInterest.size() + 1)) {
             String stringArrayListOther = arrayListOther.get(position - 2 - arrayListInterest.size());
@@ -64,18 +65,19 @@ public class ItemMoveCallBackImpl extends ItemTouchHelper.Callback {
         return false;
     }
 
+
+    public void setNoLongPressDragEnabled(ArrayList<Integer> positionArray) {
+        this.positionArray = positionArray;
+    }
+
     /**
      * 是否允许长按
      */
     @Override
     public boolean isLongPressDragEnabled() {
+        boolean isLongPressDrag = 0 < viewHolder.getAdapterPosition() && viewHolder.getAdapterPosition() < arrayListInterest.size() + 1;
 
-
-        if (0 < viewHolder.getAdapterPosition() && viewHolder.getAdapterPosition() < arrayListInterest.size() + 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return isLongPressDrag && !positionArray.contains(viewHolder.getAdapterPosition());
 
 
     }
@@ -100,19 +102,17 @@ public class ItemMoveCallBackImpl extends ItemTouchHelper.Callback {
 
 
     /***
-     *
      * 移动删除某一项时此方法触发
-     *
      */
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
     }
+
     /**
-     *
      * 移动的方式，(排序dragFlags，上下左右等)，（移动删除swipeFlags）
-     * */
+     */
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         this.viewHolder = viewHolder;
